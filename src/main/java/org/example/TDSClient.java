@@ -4,11 +4,11 @@ import org.example.services.TasksService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MTGClient {
+public class TDSClient {
     private final Retrofit retrofit;
-    private static MTGClient instance = null;
+    private static TDSClient instance = null;
 
-    private MTGClient() {
+    private TDSClient() {
         String baseurl = "https://jsonplaceholder.typicode.com/";
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
@@ -16,9 +16,9 @@ public class MTGClient {
                 .build();
     }
 
-    public static MTGClient getInstance() {
+    public static TDSClient getInstance() {
         if (instance == null) {
-            instance = new MTGClient();
+            instance = new TDSClient();
         }
         return instance;
     }

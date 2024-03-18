@@ -1,7 +1,6 @@
 package org.example;
 
 import org.example.models.Task;
-import org.example.services.TasksService;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -16,11 +15,11 @@ public class Main {
 
     public static void listTasks() {
         try {
-            Call<List<Task>> call = MTGClient.getTasksService().listTasks();
+            Call<List<Task>> call = TDSClient.getTasksService().listTasks();
                 Response<List<Task>> resp = call.execute();
-                List<Task> mtgResponse = resp.body();
-                if (mtgResponse != null) {
-                    List<Task> tasks = mtgResponse;
+                List<Task> tdsResponse = resp.body();
+                if (tdsResponse != null) {
+                    List<Task> tasks = tdsResponse;
                     for (Task task : tasks) {
                         System.out.println("Nome da tarefa: " + task.getTitle());
                         System.out.println("Situação: " + task.isCompleted());
@@ -34,13 +33,13 @@ public class Main {
 
     public static void showTask(int taskId) {
         try {
-            Call<Task> call = MTGClient.getTasksService().showTask(taskId);
+            Call<Task> call = TDSClient.getTasksService().showTask(taskId);
             Response<Task> resp = call.execute();
-            Task mtgResponse = resp.body();
-            System.out.println("Id do usuario: " + mtgResponse.getUserId());
-            System.out.println("Id da tarefa: " + mtgResponse.getId());
-            System.out.println("Nome da tarefa: " + mtgResponse.getTitle());
-            System.out.println("Situação: " + mtgResponse.isCompleted());
+            Task tdsResponse = resp.body();
+            System.out.println("Id do usuario: " + tdsResponse.getUserId());
+            System.out.println("Id da tarefa: " + tdsResponse.getId());
+            System.out.println("Nome da tarefa: " + tdsResponse.getTitle());
+            System.out.println("Situação: " + tdsResponse.isCompleted());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -49,7 +48,7 @@ public class Main {
     public static void addTask() {
         Task newTask = new Task("Estudar", 3);
 
-        Call<Task> call = MTGClient.getTasksService().addTask(newTask);
+        Call<Task> call = TDSClient.getTasksService().addTask(newTask);
 
         try {
             Response<Task> response = call.execute();
@@ -70,14 +69,14 @@ public class Main {
 
     public static void completeTask(int taskId) {
         try {
-            Call<Task> call = MTGClient.getTasksService().showTask(2);
+            Call<Task> call = TDSClient.getTasksService().showTask(2);
             Response<Task> resp = call.execute();
             Task existingTask = resp.body();
 
             if (existingTask != null && resp.isSuccessful()) {
                 existingTask.markAsCompleted();
 
-                Call<Task> updateCall = MTGClient.getTasksService().updateTask(taskId, existingTask);
+                Call<Task> updateCall = TDSClient.getTasksService().updateTask(taskId, existingTask);
                 Response<Task> updateResp = updateCall.execute();
 
                 if (updateResp.isSuccessful()) {
@@ -94,7 +93,7 @@ public class Main {
 
     public static void filterNonCompletedTasks() {
         try {
-            Call<List<Task>> call = MTGClient.getTasksService().nonCompletedTasks();
+            Call<List<Task>> call = TDSClient.getTasksService().nonCompletedTasks();
             Response<List<Task>> resp = call.execute();
             List<Task> mtgResponse = resp.body();
             if (mtgResponse != null) {
