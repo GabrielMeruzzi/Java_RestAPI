@@ -1,30 +1,30 @@
 package org.example;
 
-import org.example.services.TasksService;
+import org.example.services.ProdutosService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TDSClient {
+public class ApiClient {
     private final Retrofit retrofit;
-    private static TDSClient instance = null;
+    private static ApiClient instance = null;
 
-    private TDSClient() {
-        String baseurl = "https://jsonplaceholder.typicode.com/";
+    private ApiClient() {
+        String baseurl = "http://localhost:8080/";
         this.retrofit = new Retrofit.Builder()
                 .baseUrl(baseurl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
-    public static TDSClient getInstance() {
+    public static ApiClient getInstance() {
         if (instance == null) {
-            instance = new TDSClient();
+            instance = new ApiClient();
         }
         return instance;
     }
 
-    public static TasksService getTasksService() {
-        return getInstance().retrofit.create(TasksService.class);
+    public static ProdutosService getProdutosService() {
+        return getInstance().retrofit.create(ProdutosService.class);
     }
 
 

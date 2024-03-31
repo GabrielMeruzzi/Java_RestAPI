@@ -1,2 +1,2 @@
 ###
-GET http://localhost:4567/tasks
+GET http://localhost:8080/produtos
