@@ -1,0 +1,37 @@
+###
+GET http://localhost:8080/produtos
+
+###
+GET http://localhost:8080/produtos/1
+
+###
+POST http://localhost:8080/produtos
+Content-Type: application/json
+
+{
+    "Nome": "Testando",
+    "Descricao": "Testando api",
+    "Preco": 27.99
+}
+
+###
+PUT http://localhost:8080/produtos/16
+Content-Type: application/json
+
+{
+    "Nome": "Testando PUT",
+    "Descricao": "Testando o PUT",
+    "Preco": 27.99
+}
+
+###
+PATCH http://localhost:8080/produtos/1
+Content-Type: application/json
+
+{
+    "Descricao": "Testando o PATCH",
+    "Preco": 9999.99
+}
+
+###
+DELETE http://localhost:8080/produtos/2
